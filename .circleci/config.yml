@@ -12,9 +12,9 @@ jobs:
     steps:
       - checkout
       - run: echo "Double Trouble"
-  workflows:
-    version: 2
-    ali_aysu:
-      jobs:
-        - ali
-        - aysu
+workflows:
+  version: 2
+  ali_aysu:
+    jobs:
+      - ali
+      - aysu
