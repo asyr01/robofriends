@@ -1,20 +1,32 @@
 version: 2
 jobs:
-  ali:
+  build:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/node:8.9
     steps:
       - checkout
-      - run: echo "A first hello"
-  aysu:
+      - run: echo "npm installing"
+      - run: npm install
+  test:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/node:8.9
     steps:
       - checkout
-      - run: echo "Double Trouble"
+      - run: echo "testing stuff"
+      - run: npm install
+      - run: npm test
+  hithere:
+    docker:
+      - image: circleci/node:8.9
+    steps:
+      - checkout
+      - run: echo "hellooo!"
 workflows:
   version: 2
-  ali_aysu:
+  build_test_and_lint:
     jobs:
-      - ali
-      - aysu
+      - build
+      - hithere
+      - test:
+          requires:
+            - hithere
